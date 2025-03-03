@@ -1,0 +1,38 @@
+-- Genel SQL işlem sırası şöyledir: FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT/OFFSET
+
+-- 1. Çalışanların FirstName, LastName ve Salary attribute'ları listelenir.
+-- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir. 
+-- Ardından SELECT execute edilir ve istenilen attribute'lar SELECT ile seçilir.
+-- Seçilen attribute'ların dışında diğer attribute'lar gözükmez.
+SELECT firstname as FirstName, lastname as LastName, salary as Salary
+FROM EMPLOYEES;
+
+-- 2. Duplicate tuple'lardan kurtulmak için "Distinct" keyword'u kullanılır. Çalışanların çalıştığı departmanlar listelenir.
+-- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir.
+-- Ardından SELECT execute edilir ve istenilen attribute'lar SELECT ile seçilir. Distinct Kullanımı ile duplicate olması önlenir. Her bir departmentid 1 kez listelenir.
+-- DISTINCT, SELECT'ten sonra execute edilir.
+SELECT DISTINCT departmentid as DepartmentID
+FROM EMPLOYEES;
+
+-- 3. IT departmanında çalışanların tüm bilgileri listelenir.
+-- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir. 
+-- Ardından WHERE execute edilerek koşul belirlenir.
+-- Bundan sonra ise SELECT ile listelenmek istenen attribute'lar seçilir.
+SELECT * 
+FROM EMPLOYEES 
+WHERE departmentid = 1;
+
+-- 4. Çalışanlar maaşlarına göre azalan sırada listelenir.
+-- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir. 
+-- Ardından SELECT execute edilir ve istenilen attribute'lar SELECT ile seçilir.
+-- Bundan sonra ise ORDER BY ile listelenmek istenen attribute'lar neye göre sıralanacağı belirlenir.
+SELECT * 
+FROM EMPLOYEES 
+ORDER BY salary DESC;
+
+-- 5. Çalışanların FirstName ve LastName attribute'ları concatenation ile birleştirilip tek attribute olarak listelenir.
+-- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir. 
+-- Ardından SELECT execute edilir ve istenilen attribute'lar SELECT ile seçilir.
+-- SELECT kısmında concatenation gibi işlemler yapılabilir.
+SELECT firstname || ' ' || lastname AS FullName 
+FROM EMPLOYEES;
