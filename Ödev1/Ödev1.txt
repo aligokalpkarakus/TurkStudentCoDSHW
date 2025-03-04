@@ -9,9 +9,9 @@ FROM EMPLOYEES;
 
 -- 2. Duplicate tuple'lardan kurtulmak için "Distinct" keyword'u kullanılır. Çalışanların çalıştığı departmanlar listelenir.
 -- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir.
--- Ardından SELECT execute edilir ve istenilen attribute'lar SELECT ile seçilir. Distinct Kullanımı ile duplicate olması önlenir. Her bir departmentid 1 kez listelenir.
+-- Ardından SELECT execute edilir ve istenilen attribute'lar SELECT ile seçilir. Distinct Kullanımı ile duplicate olması önlenir. Her bir department 1 kez listelenir.
 -- DISTINCT, SELECT'ten sonra execute edilir.
-SELECT DISTINCT departmentid as DepartmentID
+SELECT DISTINCT department as Department
 FROM EMPLOYEES;
 
 -- 3. IT departmanında çalışanların tüm bilgileri listelenir.
@@ -20,7 +20,7 @@ FROM EMPLOYEES;
 -- Bundan sonra ise SELECT ile listelenmek istenen attribute'lar seçilir.
 SELECT * 
 FROM EMPLOYEES 
-WHERE departmentid = 1;
+WHERE department = 'IT';
 
 -- 4. Çalışanlar maaşlarına göre azalan sırada listelenir.
 -- İlk FROM execute edilir ve hangi tabloda işlem yapılacağı belirlenir. 
