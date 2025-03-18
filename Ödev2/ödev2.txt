@@ -1,0 +1,39 @@
+-- 1.
+-- Invoice tablosundaki tuple'ları WHERE koşulu ile belirtilen attribute'ların NULL değere sahip olup olmadığı kontrol ediliyor
+-- Tüm attribute'ların NULL olduğu bir tuple bulunmamakla beraber SELECT COUNT(*)'un döndürdüğü row sayısı 0.
+SELECT COUNT(*) 
+FROM invoice
+WHERE invoice_id IS NULL 
+  AND customer_id IS NULL 
+  AND invoice_date IS NULL 
+  AND billing_address IS NULL 
+  AND billing_city IS NULL 
+  AND billing_state IS NULL 
+  AND billing_country IS NULL 
+  AND billingpostal_code IS NULL 
+  AND total IS NULL;
+
+-- 2.
+-- Alias ile total 2 şekilde kullanılıyor. Biri original_total, diğeri ise total'in 2 ile çarpımının sonucu olan double_total
+-- Bu bilgilerin kime ait olduğunu belirtmek üzere invoice_id ve customer_id'yi de ekledim.
+-- Oluşan sorgunun sonucunda ORDER BY ile sıralama sağlanıyor.
+SELECT 
+    invoice_id, 
+    customer_id,
+    total AS original_total, 
+    total * 2 AS double_total
+FROM invoice
+ORDER BY double_total DESC;
+
+-- 3.
+-- CONCAT metodu ile sol ve sağdan istenilen karakterler kadar alınarak birleştiriliyor.
+-- WHERE koşulu ile ay ve yıla göre filtreleme gerçekleştiriliyor.
+-- billing_address ve Açık Adrese bakarak CONCAT sonucu incelenebilir.
+SELECT 
+    invoice_id,
+    billing_address,
+    CONCAT(LEFT(billing_address, 3), RIGHT(billing_address, 4)) AS "Açık Adres"
+FROM invoice
+WHERE EXTRACT(YEAR FROM invoice_date) = 2013 
+  AND EXTRACT(MONTH FROM invoice_date) = 8;
+
