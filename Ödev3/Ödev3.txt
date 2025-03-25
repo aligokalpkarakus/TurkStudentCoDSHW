@@ -1,0 +1,28 @@
+-- 1. Soru
+-- Invoice tablosundan WHERE komutundaki koşullara göre faturaların toplamı yazdırılıyor.
+SELECT SUM(total) AS total_usa_invoices_2009
+FROM invoice
+WHERE billing_country = 'USA' 
+  AND EXTRACT(YEAR FROM invoice_date) = 2009;
+
+-- 2. Soru
+-- 3 tablo PK ve FK'lar ile referential integrity üzerinden joinleniyor. İstenilen bilgiler yazdırılıyor.
+SELECT t.track_id, t.name AS track_name, 
+       pt.playlist_id, p.name AS playlist_name
+FROM track t
+JOIN playlisttrack pt ON t.track_id = pt.track_id
+JOIN playlist p ON pt.playlist_id = p.playlist_id;
+
+-- 3. Soru
+-- 3 tablo PK ve FK'lar ile referential integrity üzerinden joinleniyor. WHERE koşulu ile albüm title'ı filtresi ekleniyor
+-- ORDER BY ile sıralama sağlanıyor.
+SELECT t.track_id, t.name AS track_name, 
+       ar.name AS artist_name, 
+       t.milliseconds
+FROM track t
+JOIN album al ON t.album_id = al.album_id
+JOIN artist ar ON al.artist_id = ar.artist_id
+WHERE al.title = 'Let There Be Rock'
+ORDER BY t.milliseconds DESC;
+
+
